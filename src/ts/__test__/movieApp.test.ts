@@ -31,8 +31,6 @@ describe("tests for init()", () => {
     
         // Act
         movieApp.init();
-        
-        // form.dispatchEvent(new Event('submit'));
         form.submit();
     
         // Assert

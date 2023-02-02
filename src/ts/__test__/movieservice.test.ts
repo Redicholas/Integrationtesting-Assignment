@@ -1,4 +1,4 @@
-// import { getData } from "../services/movieservice";
+import { getData } from "../services/movieservice";
 import { IMovie } from "../models/Movie";
 
 const movies: IMovie[] = [
@@ -32,20 +32,23 @@ jest.mock("axios", () => ({
                 reject([]);
             }
             else {
-                resolve (movies);
+                resolve ({data: {Search: movies}});
             }
         });
     }
 }));
 
-// test("should get data correctly", async () => {
-//     const data = await getData("test")
-// });
+test("should get test data correctly", async () => {
+    const data = await getData("test")
 
-// test("should get error getting data", async () => {
-//     try {
-//         const data = await getData("error")
-//     } catch (error: any) {
-//         expect(error.length).toBe(0);
-//     }
-// });
+    expect(data.length).toBe(3);
+    expect(data[0].Title).toBe("The Matrix");
+});
+
+test("should get error getting data", async () => {
+    try {
+        await getData("error")
+    } catch (error: any) {
+        expect(error.length).toBe(0);
+    }
+});
